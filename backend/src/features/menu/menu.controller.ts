@@ -19,6 +19,11 @@ export interface CreateMenuBody {
   category: string;
 }
 
+export interface UpdateMenuBody {
+  name: string;
+  category: string;
+}
+
 export class MenuController {
   static getRandom(set: Context["set"]): SuggestionResponse | ErrorResponse {
     const items = MenuRepository.getRandomSuggest();
@@ -53,5 +58,29 @@ export class MenuController {
   static createMenu(body: CreateMenuBody) {
     const newId = MenuRepository.createMenu(body.name, body.category);
     return { success: true, id: newId };
+  }
+
+  static update(id: number, body: UpdateMenuBody, set: Context["set"]) {
+    const item = MenuRepository.findById(id);
+    if (!item) {
+      set.status = 404;
+      return { error: "Menu item not found" };
+    }
+
+    MenuRepository.update(id, body.name, body.category);
+    return { success: true, id, name: body.name, category: body.category };
+  }
+
+  static delete(id: number, set: Context["set"]) {
+    const item = MenuRepository.findById(id);
+    if (!item) {
+      set.status = 404;
+      return { error: "Menu item not found" };
+    }
+
+    MenuRepository.deleteHistoryByMenuId(id);
+    MenuRepository.delete(id);
+
+    return { success: true, message: "Deleted" };
   }
 }

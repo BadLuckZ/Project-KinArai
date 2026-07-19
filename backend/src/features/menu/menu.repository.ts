@@ -71,4 +71,33 @@ export class MenuRepository {
     );
     return result.lastInsertRowid as number;
   }
+
+  static update(id: number, name: string, category: string) {
+    db.run(
+      `
+        UPDATE menu 
+        SET name = ?, category = ? 
+        WHERE id = ?
+        `,
+      [name, category, id],
+    );
+  }
+
+  static deleteHistoryByMenuId(menuId: number) {
+    db.run(
+      `
+        DELETE FROM history 
+        WHERE menu_id = ?
+        `,
+      [menuId],
+    );
+  }
+
+  static delete(id: number) {
+    db.run(
+      `DELETE FROM menu 
+        WHERE id = ?`,
+      [id],
+    );
+  }
 }
