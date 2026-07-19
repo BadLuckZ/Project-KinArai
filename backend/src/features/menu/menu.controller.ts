@@ -1,5 +1,6 @@
 import { Context } from "elysia";
 import { MenuRepository } from "./menu.repository";
+import { MenuType } from "./menu.type";
 
 export interface SuggestionResponse {
   id: number;
@@ -11,6 +12,11 @@ export interface SuggestionResponse {
 
 export interface ErrorResponse {
   error: string;
+}
+
+export interface CreateMenuBody {
+  name: string;
+  category: string;
 }
 
 export class MenuController {
@@ -38,5 +44,14 @@ export class MenuController {
       category: items.category,
       daysSinceLastEaten: items.days_since ?? "never",
     };
+  }
+
+  static getAll(): MenuType[] {
+    return MenuRepository.getAll();
+  }
+
+  static createMenu(body: CreateMenuBody) {
+    const newId = MenuRepository.createMenu(body.name, body.category);
+    return { success: true, id: newId };
   }
 }

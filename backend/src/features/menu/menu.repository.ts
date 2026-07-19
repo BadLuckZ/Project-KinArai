@@ -1,5 +1,9 @@
 import { db } from "../../db";
-import { RandomSuggestMenuIdType, RandomSuggestMenuType } from "./menu.type";
+import {
+  MenuType,
+  RandomSuggestMenuIdType,
+  RandomSuggestMenuType,
+} from "./menu.type";
 
 export class MenuRepository {
   // Query a random menu item that wasn't eaten in last 3 days
@@ -42,5 +46,29 @@ export class MenuRepository {
         SELECT id FROM menu WHERE id = $id`,
       )
       .get({ $id: id }) as RandomSuggestMenuIdType;
+  }
+
+  // Get All menus
+  static getAll() {
+    return db
+      .query(
+        `
+        SELECT id, name, category
+        FROM menu
+        ORDER BY id
+        `,
+      )
+      .all() as MenuType[];
+  }
+
+  static createMenu(name: string, category: string) {
+    const result = db.run(
+      `
+        INSERT INTO MENU (name, category)
+        VALUES (?, ?)
+        `,
+      [name, category],
+    );
+    return result.lastInsertRowid as number;
   }
 }

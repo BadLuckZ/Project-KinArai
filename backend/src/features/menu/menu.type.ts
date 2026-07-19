@@ -5,6 +5,12 @@ export type RandomSuggestMenuType = {
   days_since: number | null;
 } | null;
 
+export type MenuType = {
+  id: number;
+  name: string;
+  category: string;
+};
+
 export type RandomSuggestMenuIdType = {
   id: number;
 } | null;
