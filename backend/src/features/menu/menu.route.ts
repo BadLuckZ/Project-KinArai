@@ -29,7 +29,6 @@ export const menuRoutes = new Elysia({ prefix: "/api/v1/menus" })
     },
   )
 
-  // 2. เพิ่ม API สำหรับกดยิง DELETE เพื่อลบเมนู
   .delete(
     "/:id",
     ({ params, set }) => MenuController.delete(Number(params.id), set),

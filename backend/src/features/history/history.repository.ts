@@ -2,6 +2,7 @@ import { db } from "../../db";
 import { HistoryRow } from "./history.type";
 
 export class HistoryRepository {
+  // create menu's histroy
   static createHistory(menuId: number) {
     db.run(
       `
@@ -12,6 +13,7 @@ export class HistoryRepository {
     );
   }
 
+  //   get history
   static getHistory() {
     return db
       .query(

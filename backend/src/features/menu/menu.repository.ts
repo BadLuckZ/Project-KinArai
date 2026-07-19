@@ -38,7 +38,7 @@ export class MenuRepository {
       .get() as RandomSuggestMenuType;
   }
 
-  //   Validate Menu ID
+  // Validate Menu
   static findById(id: number) {
     return db
       .query(
@@ -61,6 +61,7 @@ export class MenuRepository {
       .all() as MenuType[];
   }
 
+  // Create new menu
   static createMenu(name: string, category: string) {
     const result = db.run(
       `
@@ -72,6 +73,7 @@ export class MenuRepository {
     return result.lastInsertRowid as number;
   }
 
+  // Update existing menu
   static update(id: number, name: string, category: string) {
     db.run(
       `
@@ -83,6 +85,7 @@ export class MenuRepository {
     );
   }
 
+  //   Delete all menu's history
   static deleteHistoryByMenuId(menuId: number) {
     db.run(
       `
@@ -93,6 +96,7 @@ export class MenuRepository {
     );
   }
 
+  //   Delete menu
   static delete(id: number) {
     db.run(
       `DELETE FROM menu 
