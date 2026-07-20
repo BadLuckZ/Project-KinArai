@@ -26,19 +26,30 @@ function onCategoryChange(category: string) {
 </script>
 
 <template>
-  <div class="random-page">
-    <h1 class="font-bold text-2xl text-red-500">วันนี้กินไร?</h1>
+  <div
+    class="flex min-h-screen flex-col items-center gap-6 bg-linear-to-b from-orange-50 to-white px-4 py-12"
+  >
+    <h1 class="text-3xl font-extrabold tracking-tight text-red-500">
+      วันนี้กินไร?
+    </h1>
 
     <CategoryFilter @update:category="onCategoryChange" />
 
-    <button class="random-btn" @click="rollRandom" :disabled="isLoading">
+    <button
+      class="rounded-full bg-red-500 px-10 py-3 text-lg font-semibold text-white shadow-md shadow-red-200 transition hover:bg-red-600 active:scale-95 disabled:cursor-not-allowed disabled:bg-red-300 disabled:shadow-none"
+      @click="rollRandom"
+      :disabled="isLoading"
+    >
       {{ isLoading ? "กำลังสุ่ม..." : "สุ่มเมนู" }}
     </button>
 
-    <div v-if="currentResult != null">
-      <p>
+    <div
+      v-if="currentResult != null"
+      class="w-full max-w-sm rounded-2xl bg-white p-6 text-center shadow-lg ring-1 ring-black/5"
+    >
+      <p class="text-xl font-bold text-gray-800">
         {{ currentResult.name }}
-        <span v-if="currentResult.category"
+        <span v-if="currentResult.category" class="font-normal text-gray-400"
           >({{ currentResult.category }})</span
         >
       </p>
@@ -47,10 +58,13 @@ function onCategoryChange(category: string) {
           currentResult.daysSinceLastEaten == null ||
           typeof currentResult.daysSinceLastEaten === 'string'
         "
+        class="mt-2 text-sm font-medium text-emerald-500"
       >
         ยังไม่เคยกิน
       </p>
-      <p v-else>ไม่ได้กิน {{ currentResult.daysSinceLastEaten }} วันแล้ว</p>
+      <p v-else class="mt-2 text-sm text-gray-500">
+        ไม่ได้กิน {{ currentResult.daysSinceLastEaten }} วันแล้ว
+      </p>
     </div>
   </div>
 </template>

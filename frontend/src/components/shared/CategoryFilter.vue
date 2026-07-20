@@ -10,7 +10,10 @@ function onChange(event: Event) {
 
 <template>
   <div>
-    <select @change="onChange">
+    <select
+      class="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm text-gray-700 shadow-sm focus:border-red-400 focus:outline-none"
+      @change="onChange"
+    >
       <option v-for="cat in CATEGORIES" :key="cat.value" :value="cat.value">
         {{ cat.label }}
       </option>

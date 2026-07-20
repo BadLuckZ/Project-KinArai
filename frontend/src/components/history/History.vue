@@ -29,15 +29,27 @@ function formatDate(dateString: string) {
 </script>
 
 <template>
-  <div>
-    <h1>ประวัติการกิน</h1>
-    <p v-if="isLoading">กำลังโหลด...</p>
-    <p v-else-if="history.length === 0">ยังไม่มีประวัติ ไปสุ่มเมนูกันก่อน!</p>
-    <ul v-else class="history-list">
-      <li v-for="item in history" :key="item.id" class="history-item">
-        <span class="item-name">{{ item.name }}</span>
-        <span> เวลา </span>
-        <span class="item-date">{{ formatDate(item.eaten_at) }}</span>
+  <div
+    class="flex min-h-screen flex-col items-center gap-6 bg-linear-to-b from-orange-50 to-white px-4 py-12"
+  >
+    <h1 class="text-2xl font-extrabold tracking-tight text-red-500">
+      ประวัติการกิน
+    </h1>
+
+    <p v-if="isLoading" class="text-gray-400">กำลังโหลด...</p>
+    <p v-else-if="history.length === 0" class="text-gray-400">
+      ยังไม่มีประวัติ ไปสุ่มเมนูกันก่อน!
+    </p>
+    <ul v-else class="flex w-full max-w-md flex-col gap-3">
+      <li
+        v-for="item in history"
+        :key="item.id"
+        class="flex items-center justify-between gap-3 rounded-xl bg-white p-4 shadow-sm ring-1 ring-black/5"
+      >
+        <span class="font-semibold text-gray-800">{{ item.name }}</span>
+        <span class="text-xs text-gray-400">{{
+          formatDate(item.eaten_at)
+        }}</span>
       </li>
     </ul>
   </div>
