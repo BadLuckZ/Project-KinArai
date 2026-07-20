@@ -1,15 +1,14 @@
 import { fetchAPI } from "../lib/client";
 
-export interface SuggestionResponse {
+export interface SuggestionMenu {
   id: number;
   name: string;
   category: string;
   daysSinceLastEaten: number | "never";
-  note?: string;
 }
 
-export function getRandomMenu(): Promise<SuggestionResponse> {
-  return fetchAPI<SuggestionResponse>("/api/v1/menus/random");
+export function getRandomMenu(): Promise<SuggestionMenu> {
+  return fetchAPI<SuggestionMenu>("/api/v1/menus/random");
 }
 
 // ==========================================

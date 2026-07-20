@@ -2,16 +2,16 @@ import { Context } from "elysia";
 import { MenuRepository } from "./menu.repository";
 import { MenuType } from "./menu.type";
 
-export interface SuggestionResponse {
+export interface ErrorResponse {
+  error: string;
+}
+
+export interface SuggestionMenu {
   id: number;
   name: string;
   category: string;
   daysSinceLastEaten: number | "never";
   note?: string;
-}
-
-export interface ErrorResponse {
-  error: string;
 }
 
 export interface CreateMenuBody {
@@ -25,7 +25,7 @@ export interface UpdateMenuBody {
 }
 
 export class MenuController {
-  static getRandom(set: Context["set"]): SuggestionResponse | ErrorResponse {
+  static getRandom(set: Context["set"]): SuggestionMenu | ErrorResponse {
     const items = MenuRepository.getRandomSuggest();
 
     if (!items) {
