@@ -1,7 +1,5 @@
-<script setup></script>
+<script setup lang="ts"></script>
 
 <template>
-  <div>
-    <h1>Kin-Arai</h1>
-  </div>
+  <h1>Kin Arai</h1>
 </template>

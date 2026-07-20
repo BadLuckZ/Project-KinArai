@@ -16,7 +16,7 @@ Built as a project to practice full-stack web development and real deployment on
 Frontend
 
 ```sh
-bun create vite frontend --template vue
+bun create vite
 ```
 
 Backend
