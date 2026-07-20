@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { getRandomMenu, type SuggestionMenu } from "../../api/menu";
-import MenuCard from "../shared/MenuCard.vue";
 
 const currentResult = ref<SuggestionMenu | null>(null);
 const isLoading = ref<boolean>(false);
@@ -27,12 +26,21 @@ async function rollRandom() {
     </button>
 
     <div v-if="currentResult != null">
-      <MenuCard
-        :key="currentResult.id"
-        :name="currentResult.name"
-        :category="currentResult.category"
-        :days-since="currentResult.daysSinceLastEaten"
-      />
+      <p>
+        {{ currentResult.name }}
+        <span v-if="currentResult.category"
+          >({{ currentResult.category }})</span
+        >
+      </p>
+      <p
+        v-if="
+          currentResult.daysSinceLastEaten == null ||
+          typeof currentResult.daysSinceLastEaten === 'string'
+        "
+      >
+        ยังไม่เคยกิน
+      </p>
+      <p v-else>ไม่ได้กิน {{ currentResult.daysSinceLastEaten }} วันแล้ว</p>
     </div>
   </div>
 </template>

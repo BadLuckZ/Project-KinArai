@@ -6,6 +6,7 @@ import {
   type CreateMenuBody,
   type MenuType,
 } from "../../api/menu";
+import MenuCard from "./MenuCard.vue";
 
 const isLoading = ref<boolean>(false);
 const menuList = ref<MenuType[]>([]);
@@ -18,6 +19,10 @@ onMounted(async () => {
   isLoading.value = false;
 });
 
+async function refreshList() {
+  menuList.value = await getMenuList();
+}
+
 async function handleSubmit() {
   if (!newName.value.trim() || !newCategory.value.trim()) return;
   try {
@@ -27,7 +32,7 @@ async function handleSubmit() {
     } as CreateMenuBody);
     newName.value = "";
     newCategory.value = "";
-    menuList.value = await getMenuList();
+    await refreshList();
   } catch (error) {
     console.error("Failed to add menu:", error);
   }
@@ -35,16 +40,6 @@ async function handleSubmit() {
 </script>
 
 <template>
-  <div>
-    <h1>รายการ Menu ที่มี</h1>
-    <p v-if="isLoading">Loading...</p>
-    <ul v-else>
-      <li v-for="menu in menuList" :key="menu.id">
-        {{ menu.name }} ({{ menu.category }})
-      </li>
-    </ul>
-  </div>
-
   <div>
     <h1>จัดการร้านอาหาร</h1>
     <form @submit.prevent="handleSubmit">
@@ -62,11 +57,14 @@ async function handleSubmit() {
     </form>
 
     <p v-if="isLoading">กำลังโหลด...</p>
-
     <ul v-else>
-      <li v-for="item in menuList" :key="item.id">
-        <span>{{ item.name }}</span>
-      </li>
+      <MenuCard
+        v-for="menu in menuList"
+        :key="menu.id"
+        :menu="menu"
+        @changed="refreshList"
+      />
+      <!-- @changed means when there's "changed" message, do this -->
     </ul>
   </div>
 </template>
