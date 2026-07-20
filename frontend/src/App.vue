@@ -4,6 +4,13 @@ import { RouterView } from "vue-router";
 
 <template>
   <div class="app">
-    <RouterView />
+    <nav>
+      <RouterLink to="/">สุ่มเมนู</RouterLink>
+      <RouterLink to="/history">ประวัติ</RouterLink>
+      <RouterLink to="/menu">จัดการร้าน</RouterLink>
+    </nav>
+    <main class="content">
+      <RouterView />
+    </main>
   </div>
 </template>
