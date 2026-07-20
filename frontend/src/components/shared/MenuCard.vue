@@ -4,6 +4,9 @@ defineProps({
     type: String,
     required: true,
   },
+  category: {
+    type: String,
+  },
   daysSince: {
     type: [Number, String],
     default: null,
@@ -13,7 +16,10 @@ defineProps({
 
 <template>
   <div>
-    <p>{{ name }}</p>
+    <p>
+      {{ name }}
+      <span v-if="category">({{ category }})</span>
+    </p>
     <p v-if="daysSince == null || typeof daysSince === 'string'">
       ยังไม่เคยกิน
     </p>

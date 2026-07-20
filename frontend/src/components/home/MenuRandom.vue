@@ -28,7 +28,9 @@ async function rollRandom() {
 
     <div v-if="currentResult != null">
       <MenuCard
+        :key="currentResult.id"
         :name="currentResult.name"
+        :category="currentResult.category"
         :days-since="currentResult.daysSinceLastEaten"
       />
     </div>
