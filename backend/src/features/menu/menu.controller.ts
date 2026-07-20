@@ -25,8 +25,11 @@ export interface UpdateMenuBody {
 }
 
 export class MenuController {
-  static getRandom(set: Context["set"]): SuggestionMenu | ErrorResponse {
-    const items = MenuRepository.getRandomSuggest();
+  static getRandom(
+    category: string,
+    set: Context["set"],
+  ): SuggestionMenu | ErrorResponse {
+    const items = MenuRepository.getRandomSuggest(category);
 
     if (!items) {
       const fallback = MenuRepository.getFallbackSuggest();

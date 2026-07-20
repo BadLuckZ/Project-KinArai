@@ -7,7 +7,7 @@ import {
 
 export class MenuRepository {
   // Query a random menu item that wasn't eaten in last 3 days
-  static getRandomSuggest() {
+  static getRandomSuggest(category: string) {
     return db
       .query(
         `
@@ -15,13 +15,14 @@ export class MenuRepository {
         CAST(julianday('now') - julianday(MAX(h.eaten_at)) AS INTEGER) as days_since
         FROM menu m
         LEFT JOIN history h ON m.id = h.menu_id
+        WHERE $category = '' OR m.category = $category
         GROUP BY m.id
         HAVING days_since IS NULL OR days_since >= 3
         ORDER BY RANDOM()
         LIMIT 1
         `,
       )
-      .get() as RandomSuggestMenuType;
+      .get({ $category: category }) as RandomSuggestMenuType;
   }
 
   // Query a random menu

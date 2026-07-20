@@ -7,8 +7,9 @@ export interface SuggestionMenu {
   daysSinceLastEaten: number | "never";
 }
 
-export function getRandomMenu(): Promise<SuggestionMenu> {
-  return fetchAPI<SuggestionMenu>("/api/v1/menus/random");
+export function getRandomMenu(category: string): Promise<SuggestionMenu> {
+  const params = category ? `?category=${encodeURIComponent(category)}` : "";
+  return fetchAPI<SuggestionMenu>(`/api/v1/menus/random${params}`);
 }
 
 // ==========================================

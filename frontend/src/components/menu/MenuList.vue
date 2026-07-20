@@ -7,6 +7,7 @@ import {
   type MenuType,
 } from "../../api/menu";
 import MenuCard from "./MenuCard.vue";
+import { CATEGORIES } from "../../lib/const.ts";
 
 const isLoading = ref<boolean>(false);
 const menuList = ref<MenuType[]>([]);
@@ -48,11 +49,11 @@ async function handleSubmit() {
         type="text"
         placeholder="ชื่อร้าน เช่น ส้มตำป้าแดง"
       />
-      <input
-        v-model="newCategory"
-        type="text"
-        placeholder="หมวดหมู่ เช่น ส้มตำ"
-      />
+      <select v-model="newCategory" placeholder="หมวดหมู่ เช่น ส้มตำ">
+        <option v-for="cat in CATEGORIES" :key="cat.value" :value="cat.value">
+          {{ cat.label }}
+        </option>
+      </select>
       <button type="submit">เพิ่ม</button>
     </form>
 
