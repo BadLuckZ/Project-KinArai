@@ -27,7 +27,7 @@ function onCategoryChange(category: string) {
 
 <template>
   <div class="random-page">
-    <h1 class="title">วันนี้กินไร?</h1>
+    <h1 class="font-bold text-2xl text-red-500">วันนี้กินไร?</h1>
 
     <CategoryFilter @update:category="onCategoryChange" />
 
