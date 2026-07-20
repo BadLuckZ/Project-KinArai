@@ -6,8 +6,8 @@ export class HistoryRepository {
   static createHistory(menuId: number) {
     db.run(
       `
-        INSERT INTO history (menu_id, eaten_at) 
-        VALUES (?, date('now'))
+        INSERT INTO history (menu_id, eaten_at)
+        VALUES (?, datetime('now'))
         `,
       [menuId],
     );

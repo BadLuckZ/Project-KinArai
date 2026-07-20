@@ -16,7 +16,7 @@ db.run(`
   CREATE TABLE IF NOT EXISTS history (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     menu_id INTEGER NOT NULL,
-    eaten_at TEXT NOT NULL DEFAULT (date('now')),
+    eaten_at TEXT NOT NULL DEFAULT (datetime('now')),
     FOREIGN KEY (menu_id) REFERENCES menu(id)
   )
 `);
