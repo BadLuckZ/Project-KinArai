@@ -1,5 +1,9 @@
-<script setup lang="ts"></script>
+<script setup>
+import { RouterView } from "vue-router";
+</script>
 
 <template>
-  <h1>Kin Arai</h1>
+  <div class="app">
+    <RouterView />
+  </div>
 </template>
