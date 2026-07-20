@@ -10,3 +10,17 @@ Built as a project to practice full-stack web development and real deployment on
 - [Elysia](https://elysiajs.com)
 - [Vue 3](https://vuejs.org)
 - [Vite](https://vitejs.dev)
+
+# Initialization
+
+Frontend
+
+```sh
+bun create vite frontend --template vue
+```
+
+Backend
+
+```sh
+bun create elysia backend
+```
